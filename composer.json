@@ -1,0 +1,29 @@
+{
+	"name" : "estart/image",
+	"description" : "EStart image component, implement thumbnail and watermark features. EStart 图片处理组件，实现生成缩略图和打水印功能。",
+	"type" : "library",
+	"keywords" : [
+		"watermark",
+		"thumbnail",
+		"thumb",
+		"image",
+		"GD"
+	],
+	"version" : "1.0.0",
+	"time" : "2022-03-26 18:30:00",
+	"require" : {
+		"php" : "^8.0",
+		"ext-gd": "*"
+	},
+	"license" : "MIT",
+	"autoload" : {
+		"psr-4" : {
+			"wf\\image\\" : "lib"
+		}
+	},
+	"authors" : [{
+			"name" : "estart store",
+			"homepage" : "https://github.org/estart-store"
+		}
+	]
+}
