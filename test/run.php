@@ -1,27 +1,26 @@
 <?php
-use EStart\image\Factory;
+use EStart\image\ImageFactory;
 use EStart\image\ImageInterface;
 
 PHP_SAPI == 'cli' || die('access denied');
 $start = microtime(1);
 
-require_once '../lib/Factory.php';
+require_once '../lib/ImageFactory.php';
 require_once '../lib/ImageInterface.php';
 require_once '../lib/ImageGD.php';
 
 /**
- *
+ * 生成缩略图
  */
 function testThumb(ImageInterface $img, $width, $height, $dist, $isCut = true, $cutPos = 5): void
 {
-    $thumbCtx = $img->thumb($width, $height, $isCut, $cutPos);
-    if($thumbCtx) {
+    if($thumbCtx = $img->thumb($width, $height, $isCut, $cutPos)) {
         file_put_contents($dist, $thumbCtx);
     }
 }
 
 /**
- *
+ * 打水印
  */
 function testWatermark(ImageInterface $img, $dist, $watermarkPlace = 9, $quality = 95, $waterFile = 'src_image/logo.png'): void
 {
@@ -29,7 +28,7 @@ function testWatermark(ImageInterface $img, $dist, $watermarkPlace = 9, $quality
     file_put_contents($dist, $ret);
 }
 
-$img = Factory::image(file_get_contents('src_image/1.png'));
+$img = ImageFactory::create(file_get_contents('src_image/1.png'));
 
 testThumb($img, 0,   200, 'dist_image/thumb.png.cut_0x200.jpg', true);
 testThumb($img, 0,   400, 'dist_image/thumb.png.cut_0x400.jpg', true);
@@ -53,7 +52,7 @@ testThumb($img, 300, 600, 'dist_image/thumb.png.uncut_300x600.jpg', false);
 testThumb($img, 600, 300, 'dist_image/thumb.png.uncut_600x300.jpg', false);
 
 // test jpg
-$img = Factory::image(file_get_contents('src_image/2.jpg'));
+$img = ImageFactory::create(file_get_contents('src_image/2.jpg'));
 
 testThumb($img, 0,   200, 'dist_image/thumb.jpg.cut_0x200.jpg', true);
 testThumb($img, 300, 0,   'dist_image/thumb.jpg.cut_300x0.jpg', true);
@@ -73,7 +72,7 @@ testThumb($img, 500, 500, 'dist_image/thumb.jpg.cut_500x500-8.jpg', true, 8);
 testThumb($img, 500, 500, 'dist_image/thumb.jpg.cut_500x500-9.jpg', true, 9);
 
 // test gif
-$img = Factory::image(file_get_contents('src_image/3.gif'));
+$img = ImageFactory::create(file_get_contents('src_image/3.gif'));
 testThumb($img, 0,   100, 'dist_image/thumb.gif.cut_0x100.jpg', true);
 testThumb($img, 200, 0,   'dist_image/thumb.gif.cut_200x0.jpg', true);
 testThumb($img, 200, 100, 'dist_image/thumb.gif.cut_200x100.jpg', true);
@@ -82,13 +81,13 @@ testThumb($img, 200, 100, 'dist_image/thumb.gif.uncut_200x100.jpg', false);
 testThumb($img, 100, 200, 'dist_image/thumb.gif.uncut_100x200.jpg', false);
 
 # 打水印
-$img = Factory::image(file_get_contents('src_image/1.png'));
+$img = ImageFactory::create(file_get_contents('src_image/1.png'));
 testWatermark($img, 'dist_image/water.png.jpg');
 
-$img = Factory::image(file_get_contents('src_image/2.jpg'));
+$img = ImageFactory::create(file_get_contents('src_image/2.jpg'));
 testWatermark($img, 'dist_image/water.jpg.jpg');
 
-$img = Factory::image(file_get_contents('src_image/3.gif'));
+$img = ImageFactory::create(file_get_contents('src_image/3.gif'));
 testWatermark($img, 'dist_image/water.gif.jpg');
 
 $end = microtime(1);

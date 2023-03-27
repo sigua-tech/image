@@ -6,11 +6,11 @@ namespace EStart\image;
 /**
  * 图片处理类，使用GD2生成缩略图和打水印.
  */
-class Factory
+class ImageFactory
 {
     public static string $driver = 'gd';
 
-    public static function image(string $imageContent, array $bgRgb = null): ImageInterface
+    public static function create(string $imageContent, array $bgRgb = null): ImageInterface
     {
         $drivers = [
             'gd' => ImageGD::class,

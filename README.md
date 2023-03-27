@@ -17,26 +17,24 @@ composer require estart/image
 
 ## 生成缩略图
 ```php
+use EStart\\image\\ImageFactory;
+
 // 设置源图片内容
-$img = Factory::image(file_get_contents('src_image/1.png'));
+$img = ImageFactory::create((file_get_contents('src_image/1.png'));
 
 // 生成200x200的缩略图，超过比例截掉
 $imgContent = $img->thumb(200, 200);
+// 保存图片
 file_put_contents('dist_image/thumb.png.cut_100x200.jpg', $imgContent);
 
 // 生成100x200的缩略图，超过比例则补白色背景
 $imgContent = $img->thumb(100, 200, false);
+// 保存图片
 file_put_contents('dist_image/thumb.png.uncut_100x200.jpg', $imgContent);
-```
 
-## 打水印
-
-```php
-// 设置源图片内容
-$img = Factory::image(file_get_contents('src_image/1.png'));
-
-// 给图片内容打水印后，保存到'dist_image/water.png.jpg'
+// 打水印
 $imgContent = $img->watermark('src_image/logo.png');
+// 保存图片
 file_put_contents('dist_image/water1.jpg', $imgContent);
 
 ```
