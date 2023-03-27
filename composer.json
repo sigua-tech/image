@@ -10,7 +10,7 @@
 		"GD"
 	],
 	"version" : "1.0.0",
-	"time" : "2022-03-26 18:30:00",
+	"time" : "2023-03-26 18:30:00",
 	"require" : {
 		"php" : "^8.0",
 		"ext-gd": "*"
@@ -18,7 +18,7 @@
 	"license" : "MIT",
 	"autoload" : {
 		"psr-4" : {
-			"wf\\image\\" : "lib"
+			"EStart\\image\\" : "lib"
 		}
 	},
 	"authors" : [{
